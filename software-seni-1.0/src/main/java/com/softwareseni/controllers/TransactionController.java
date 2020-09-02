@@ -40,7 +40,7 @@ public class TransactionController {
 	
 	@GetMapping("/types/{type}") 
 	public List<Long> getListTransaction(@PathVariable(value = "type") String type) { 
-		return transactionRepository.findTransactionIdByType(type); 
+		return transactionRepository.getTransactionIdByType(type); 
 	}
 	
 	@GetMapping(path = "/sum/{transactionId}")
@@ -48,9 +48,10 @@ public class TransactionController {
 		Transaction transaction;
 		Double sum = 0.0;
 		transaction = transactionRepository.getOne(transactionId);
-		if (transaction.getParentId()!=null && transaction.getParentId()>0) {
-			Transaction parentTrans = transactionRepository.getOne(transaction.getParentId());
-			sum = transaction.getAmount()+parentTrans.getAmount();
+		System.out.println(transaction.getParentId());
+		if (transaction.getParentId() == null) {
+			Double amountParent = transactionRepository.getAmountByParentId(transactionId);
+			sum = transaction.getAmount()+amountParent;
 			return sum;
 		} else {
 			sum = transaction.getAmount();
