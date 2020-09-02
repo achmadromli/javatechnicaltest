@@ -23,7 +23,7 @@ public class TransactionController {
 	private TransactionRepository transactionRepository;
 	
 	@PutMapping(path = "/transaction/{transactionId}")
-	public HttpStatus addTransaction(@PathVariable(value = "transaksiId") Long transactionId, @RequestBody Transaction reqTran) {
+	public HttpStatus addTransaction(@PathVariable(value = "transactionId") Long transactionId, @RequestBody Transaction reqTran) {
 		Transaction transaction = new Transaction();
 		transaction.setTransactionId(transactionId);
 		transaction.setAmount(reqTran.getAmount());
