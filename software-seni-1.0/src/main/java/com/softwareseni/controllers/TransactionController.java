@@ -22,8 +22,8 @@ public class TransactionController {
 	@Autowired
 	private TransactionRepository transactionRepository;
 	
-	@PutMapping("/transaction/{transactionId}")
-	public HttpStatus addTransaction(@PathVariable(value = "transactionId") Long transactionId, @RequestBody Transaction reqTran) {
+	@PutMapping(path = "/transaction/{transactionId}")
+	public HttpStatus addTransaction(@PathVariable(value = "transaksiId") Long transactionId, @RequestBody Transaction reqTran) {
 		Transaction transaction = new Transaction();
 		transaction.setTransactionId(transactionId);
 		transaction.setAmount(reqTran.getAmount());
@@ -33,17 +33,17 @@ public class TransactionController {
 		return HttpStatus.OK;
 	}
 	
-	@GetMapping("/transaction/{transactionId}")
+	@GetMapping(path = "/transaction/{transactionId}")
 	public Optional<Transaction> getTransaction(@PathVariable(value = "transactionId") Long transactionId) {
 		return transactionRepository.findById(transactionId);
 	}
 	
-	@GetMapping("/types/{type}")
-	public List<Long> getListTransaction(@PathVariable(value = "type") String type) {
-		return transactionRepository.findTransactionIdByType(type);
+	@GetMapping("/types/{type}") 
+	public List<Long> getListTransaction(@PathVariable(value = "type") String type) { 
+		return transactionRepository.findTransactionIdByType(type); 
 	}
 	
-	@GetMapping("/sum/{transactionId}")
+	@GetMapping(path = "/sum/{transactionId}")
 	public Double sumTransaction(@PathVariable(value = "transactionId") Long transactionId) {
 		Transaction transaction;
 		Double sum = 0.0;

@@ -1,12 +1,14 @@
 package com.softwareseni.entities;
 
 import javax.persistence.Entity;
+import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "transaction")
+@Table(name="transai")
 public class Transaction {
 	
+	@Id
 	private Long transactionId;
 	
 	private String type;
@@ -15,6 +17,17 @@ public class Transaction {
 	
 	private Long parentId;
 	
+	public Transaction() {
+		super();
+	}
+	
+	public Transaction(Long transactionId, String type, Double amount, Long parentId) {
+		this.transactionId = transactionId;
+		this.type = type;
+		this.amount = amount;
+		this.parentId = parentId;
+	}
+
 	public Long getTransactionId() {
 		return transactionId;
 	}
